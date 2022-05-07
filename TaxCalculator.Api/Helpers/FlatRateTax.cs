@@ -19,11 +19,11 @@
             set 
             { 
                 _annualIncome = value;
-                CalculateTax();
+                GetTax();
             }
         }
 
-        public override void CalculateTax()
+        private void GetTax()
         {
 
             _totalTaxAmount = _annualIncome * (17.5/100);

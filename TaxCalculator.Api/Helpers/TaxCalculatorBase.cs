@@ -4,6 +4,6 @@
     {
         public abstract double TotalTaxAmount { get; }
         public abstract double AnnualIncome { set; }
-        public abstract void CalculateTax();
+
     }
 }
