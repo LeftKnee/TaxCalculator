@@ -23,7 +23,16 @@ namespace TaxCalculator.Api.Repositories
             switch (taxCalculatorLogDto.PostalCode)
             {
                 case "7441":
+                case "1000":
                     factory = new ProgressiveTaxFactory(annualIncome);
+                    break;
+
+                case "A100":
+                    factory = new FlatValueTaxFactory(annualIncome);
+                    break;
+
+                case "7000":
+                    factory = new FlatRateTaxFactory(annualIncome);
                     break;
 
                 default:
