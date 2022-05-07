@@ -40,5 +40,28 @@ namespace TaxCalculator.Api.Controllers
             }
 
         }
+
+        [HttpPost]
+        public async Task<ActionResult<TaxCalculatorLogDto>> PostItem([FromBody] TaxCalculatorLogDto taxCalculatorLogDto)
+        {
+            try
+            {
+                var newLogEntry = await this._taxCalculatorLogRepository.AddLogItem(taxCalculatorLogDto);
+
+                if (newLogEntry == null)
+                {
+                    return NoContent();
+                }
+
+                return CreatedAtAction(nameof(PostItem), new { id = newLogEntry.Id }, newLogEntry);
+
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
     }
 }
