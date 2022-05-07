@@ -6,6 +6,6 @@ namespace TaxCalculator.Api.Repositories.Contracts
     public interface ITaxCalculatorLogRepository
     {
         Task<IEnumerable<TaxCalculatorLog>> GetLogAsync();
-        Task<TaxCalculatorLog> AddLogItem(TaxCalculatorLogDto taxCalculatorLogDto);
+        Task<TaxCalculatorLog> AddLogItem(TaxCalculatorLogUpdateDto taxCalculatorLogDto);
     }
 }

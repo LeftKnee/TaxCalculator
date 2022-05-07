@@ -4,6 +4,6 @@ namespace TaxCalculator.Web.Services.Contracts
 {
     public interface ITaxCalculatorService
     {
-        Task<IEnumerable<TaxCalculatorLogDto>> GetLogItems();
+        Task<IEnumerable<TaxCalculatorLogDisplayDto>> GetLogItems();
     }
 }

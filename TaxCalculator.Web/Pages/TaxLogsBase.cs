@@ -10,7 +10,7 @@ namespace TaxCalculator.Web.Pages
         public ITaxCalculatorService TaxCalculatorLogService { get; set; }
         public string ErrorMessage { get; set; }
 
-        public IEnumerable<TaxCalculatorLogDto> TaxCalculatorLogs { get; set; }
+        public IEnumerable<TaxCalculatorLogDisplayDto> TaxCalculatorLogs { get; set; }
 
         protected override async Task OnInitializedAsync()
         {

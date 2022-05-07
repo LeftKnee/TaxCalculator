@@ -1,10 +1,11 @@
 ﻿
 namespace TaxCalculator.Models.Dtos
 {
-    public class TaxCalculatorLogDto
+    public class TaxCalculatorLogDisplayDto
     {
+        public DateTime DateAdded { get; set; }
         public string PostalCode { get; set; }
         public double AnnualIncome { get; set; }
-        
+        public double TaxedValue { get; set; }
     }
 }

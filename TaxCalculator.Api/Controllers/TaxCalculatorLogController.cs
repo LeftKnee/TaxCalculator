@@ -16,7 +16,7 @@ namespace TaxCalculator.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TaxCalculatorLogDto>>> GetLogItems()
+        public async Task<ActionResult<IEnumerable<TaxCalculatorLogDisplayDto>>> GetLogItems()
         {
             try
             {
@@ -42,7 +42,7 @@ namespace TaxCalculator.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<TaxCalculatorLogDto>> PostItem([FromBody] TaxCalculatorLogDto taxCalculatorLogDto)
+        public async Task<ActionResult<TaxCalculatorLogUpdateDto>> PostItem([FromBody] TaxCalculatorLogUpdateDto taxCalculatorLogDto)
         {
             try
             {

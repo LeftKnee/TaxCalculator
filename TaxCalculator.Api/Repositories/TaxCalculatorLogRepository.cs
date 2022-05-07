@@ -15,7 +15,7 @@ namespace TaxCalculator.Api.Repositories
             this._taxCalculatorDbContext = taxCalculatorDbContext;
         }
 
-        public async Task<TaxCalculatorLog> AddLogItem(TaxCalculatorLogDto taxCalculatorLogDto)
+        public async Task<TaxCalculatorLog> AddLogItem(TaxCalculatorLogUpdateDto taxCalculatorLogDto)
         {
             TaxFactory factory = null;
             var annualIncome = taxCalculatorLogDto.AnnualIncome;

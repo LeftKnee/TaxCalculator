@@ -12,7 +12,7 @@ namespace TaxCalculator.Web.Services
             this._httpClient = httpClient;
         }
 
-        public async Task<IEnumerable<TaxCalculatorLogDto>> GetLogItems()
+        public async Task<IEnumerable<TaxCalculatorLogDisplayDto>> GetLogItems()
         {
             try
             {
@@ -22,10 +22,10 @@ namespace TaxCalculator.Web.Services
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
                     {
-                        return Enumerable.Empty<TaxCalculatorLogDto>();
+                        return Enumerable.Empty<TaxCalculatorLogDisplayDto>();
                     }
 
-                    return await response.Content.ReadFromJsonAsync<IEnumerable<TaxCalculatorLogDto>>();
+                    return await response.Content.ReadFromJsonAsync<IEnumerable<TaxCalculatorLogDisplayDto>>();
                 }
                 else
                 {
