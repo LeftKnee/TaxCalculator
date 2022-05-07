@@ -1,0 +1,36 @@
+﻿@page "/"
+@inherits TaxLogsBase
+
+@if (TaxCalculatorLogs == null && ErrorMessage == null)
+{
+    <DisplaySpinner />
+
+}
+else if (ErrorMessage != null)
+{
+    <DisplayError ErrorMessage="@ErrorMessage"></DisplayError>
+}
+else
+{
+    <h3 class="mb-5">Tax log items</h3>
+
+    var taxLogCount = TaxCalculatorLogs.Count();
+    var logRowList = new List<TaxCalculatorLogDto>();
+
+    @for (int i = 0; i < taxLogCount; i++)
+    {
+        logRowList = TaxCalculatorLogs.Skip(i * 10).Take(10).ToList();
+
+        <div class="row mt-3">
+            @foreach(var item in logRowList)
+            {
+               <p class="card-text">
+                   @item.DateAdded.ToShortDateString()
+               </p>
+            }
+
+        </div>
+
+    }
+
+}
