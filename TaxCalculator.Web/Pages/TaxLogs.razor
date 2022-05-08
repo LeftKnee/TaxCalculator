@@ -12,6 +12,15 @@ else if (ErrorMessage != null)
 }
 else
 {
+    <EditForm Model="@taxCalculatorUpdater" OnValidSubmit="@HandleValidSubmit">
+        
+        Postal Code: <InputText id="postalCode"  @bind-Value="taxCalculatorUpdater.PostalCode" />
+        Annual Income: <InputNumber id="annualIncome" @bind-Value="taxCalculatorUpdater.AnnualIncome" />
+
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </EditForm>
+
+
     <h3 class="mb-5">Tax log items</h3>
 
     var taxLogCount = TaxCalculatorLogs.Count();
@@ -45,6 +54,14 @@ else
         </table>
     </div>
 
+    @code {
+    private TaxCalculatorLogUpdateDto taxCalculatorUpdater = new();
 
+    private void HandleValidSubmit()
+    {
+        
+        AddLogItem_Click(taxCalculatorUpdater);
+    }
+}
 
 }

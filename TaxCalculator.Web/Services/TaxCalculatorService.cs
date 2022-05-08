@@ -1,4 +1,6 @@
-﻿using System.Net.Http.Json;
+﻿using Newtonsoft.Json;
+using System.Net.Http.Json;
+using System.Text;
 using TaxCalculator.Models.Dtos;
 using TaxCalculator.Web.Services.Contracts;
 
@@ -10,6 +12,32 @@ namespace TaxCalculator.Web.Services
         public TaxCalculatorService(HttpClient httpClient)
         {
             this._httpClient = httpClient;
+        }
+
+        public async Task<TaxCalculatorLogUpdateDto> AddTaxLogItem(TaxCalculatorLogUpdateDto updaterDto)
+        {
+            try
+            {
+                var json = JsonConvert.SerializeObject(updaterDto);
+                var data = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await this._httpClient.PostAsync("api/TaxCalculatorLog", data);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadFromJsonAsync<TaxCalculatorLogUpdateDto>();
+                }
+                else
+                {
+                    var message = await response.Content.ReadAsStringAsync();
+                    throw new Exception($"Http status code: {response.StatusCode} message: {message}");
+                }
+
+            }
+            catch (Exception)
+            {
+                //We may want to log this exception
+                throw;
+            }
         }
 
         public async Task<IEnumerable<TaxCalculatorLogDisplayDto>> GetLogItems()
