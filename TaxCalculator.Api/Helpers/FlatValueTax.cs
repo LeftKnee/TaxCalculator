@@ -25,8 +25,15 @@
 
         private void GetTax()
         {
-
-            _totalTaxAmount = 1;
+            if (_annualIncome < 200000 )
+            {
+                _totalTaxAmount = _annualIncome * (0.05);
+            }
+            else
+            {
+                _totalTaxAmount = 10000;
+            }
+                
 
         }
     }
