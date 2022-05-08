@@ -39,6 +39,9 @@ namespace TaxCalculator.Api.Repositories
                     break;
             }
 
+            if (factory == null)
+                return new TaxCalculatorLog();
+
             TaxCalculatorBase tax = factory.CalculateTax();
 
             var result = await this._taxCalculatorDbContext.AddAsync(new TaxCalculatorLog
