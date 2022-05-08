@@ -28,6 +28,7 @@
         {
             var taxToBePaid = 0m;
 
+            // Comment - this works for the static example, but would likely be read in from sort of DB driven logic process.
             var taxRanges = new[]
                              {
                                 new { Lower = 0m, Upper = 8350m, Rate = 0.1m },

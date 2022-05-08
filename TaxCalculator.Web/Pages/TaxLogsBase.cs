@@ -32,6 +32,9 @@ namespace TaxCalculator.Web.Pages
         {
 
             var updatedDto = await TaxCalculatorLogService.AddTaxLogItem(TaxCalculatorUpdater);
+            
+            // Comment: This is not ideal and could have been avoided if the bindings were
+            //          created properly from the beginning.
             TaxCalculatorLogs = (await TaxCalculatorLogService.GetLogItems()).ToList();
             StateHasChanged();
         }

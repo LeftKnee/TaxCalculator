@@ -20,6 +20,9 @@ namespace TaxCalculator.Api.Repositories
             TaxFactory factory = null;
             var annualIncome = taxCalculatorLogDto.AnnualIncome;
 
+            // Comment: This could have been done better in real life.
+            //          Ideally - the tax class itself should be aware of the postal codes and hand that back here
+            //          for a decision to be made on which factory to be used.
             switch (taxCalculatorLogDto.PostalCode)
             {
                 case "7441":
@@ -39,6 +42,9 @@ namespace TaxCalculator.Api.Repositories
                     break;
             }
 
+            // Comment: Messy - but for this it works. If no factory is found, it could indicate a data error, or something else went wrong
+            //          So we should perhaps be logging it or giving some other sort of feedback. For now - just return an empty object
+            //          to at least prevent a complete unhandled exception.
             if (factory == null)
                 return new TaxCalculatorLog();
 

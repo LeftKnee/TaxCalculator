@@ -24,6 +24,7 @@ namespace TaxCalculator.Web.Services
 
                 if (response.IsSuccessStatusCode)
                 {
+                    // Comment: Possible null checking here should have been done.
                     return await response.Content.ReadFromJsonAsync<TaxCalculatorLogUpdateDto>();
                 }
                 else
@@ -35,7 +36,7 @@ namespace TaxCalculator.Web.Services
             }
             catch (Exception)
             {
-                //We may want to log this exception
+                //Comment: We may want to log this exception and in a real life scenarion something that would have been done.
                 throw;
             }
         }
@@ -53,6 +54,7 @@ namespace TaxCalculator.Web.Services
                         return Enumerable.Empty<TaxCalculatorLogDisplayDto>();
                     }
 
+                    // Comment: There may be a null here and normally would have checked.
                     return await response.Content.ReadFromJsonAsync<IEnumerable<TaxCalculatorLogDisplayDto>>();
                 }
                 else
