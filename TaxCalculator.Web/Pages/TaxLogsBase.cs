@@ -10,14 +10,14 @@ namespace TaxCalculator.Web.Pages
         public ITaxCalculatorService TaxCalculatorLogService { get; set; }
         public string ErrorMessage { get; set; }
 
-        public IEnumerable<TaxCalculatorLogDisplayDto> TaxCalculatorLogs { get; set; }
+        public IList<TaxCalculatorLogDisplayDto> TaxCalculatorLogs { get; set; }
         public TaxCalculatorLogUpdateDto TaxCalculatorUpdater { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
             try
             {
-                TaxCalculatorLogs = await TaxCalculatorLogService.GetLogItems();
+                TaxCalculatorLogs = (await TaxCalculatorLogService.GetLogItems()).ToList();
 
             }
             catch (Exception ex)
@@ -30,9 +30,11 @@ namespace TaxCalculator.Web.Pages
 
         protected async Task AddLogItem_Click(TaxCalculatorLogUpdateDto TaxCalculatorUpdater)
         {
-            
-            var updatedDto = await TaxCalculatorLogService.AddTaxLogItem(TaxCalculatorUpdater);
 
+            var updatedDto = await TaxCalculatorLogService.AddTaxLogItem(TaxCalculatorUpdater);
+            TaxCalculatorLogs = (await TaxCalculatorLogService.GetLogItems()).ToList();
+            StateHasChanged();
         }
     }
 }
+

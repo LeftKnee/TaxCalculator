@@ -3,7 +3,7 @@
 
 @if (TaxCalculatorLogs == null && ErrorMessage == null)
 {
-    <DisplaySpinner />
+    <DisplaySpinner>Loading stored tax logs.....</DisplaySpinner>
 
 }
 else if (ErrorMessage != null)
@@ -13,8 +13,8 @@ else if (ErrorMessage != null)
 else
 {
     <EditForm Model="@taxCalculatorUpdater" OnValidSubmit="@HandleValidSubmit">
-        
-        Postal Code: <InputText id="postalCode"  @bind-Value="taxCalculatorUpdater.PostalCode" />
+
+        Postal Code: <InputText id="postalCode" @bind-Value="taxCalculatorUpdater.PostalCode" />
         Annual Income: <InputNumber id="annualIncome" @bind-Value="taxCalculatorUpdater.AnnualIncome" />
 
         <button class="btn btn-primary" type="submit">Submit</button>
@@ -23,11 +23,6 @@ else
 
     <h3 class="mb-5">Tax log items</h3>
 
-    var taxLogCount = TaxCalculatorLogs.Count();
-    var logRowList = new List<TaxCalculatorLogDisplayDto>();
-
-
-    logRowList = TaxCalculatorLogs.ToList();
 
     <div class="container">
         <h3 class="p-3 text-center">List of tax log items</h3>
@@ -41,7 +36,7 @@ else
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in logRowList)
+                @foreach (var item in TaxCalculatorLogs.ToList())
                 {
                     <tr>
                         <td>@item.DateAdded.ToShortDateString()</td>
@@ -57,10 +52,11 @@ else
     @code {
     private TaxCalculatorLogUpdateDto taxCalculatorUpdater = new();
 
+
     private void HandleValidSubmit()
     {
-        
         AddLogItem_Click(taxCalculatorUpdater);
+
     }
 }
 
