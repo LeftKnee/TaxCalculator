@@ -5,7 +5,7 @@ using TaxCalculator.Api.Data;
 using TaxCalculator.Api.Entities;
 using TaxCalculator.Api.Repositories;
 using TaxCalculator.Api.Repositories.Contracts;
-
+using TaxCalculator.Models.Dtos;
 
 namespace TaxCalculator.Tests
 {
@@ -13,9 +13,15 @@ namespace TaxCalculator.Tests
     public class Tests
     {
 
-        public readonly ITaxCalculatorLogRepository _logRepository; 
+        public Mock<ITaxCalculatorLogRepository> _logRepository; 
         [SetUp]
         public void Setup()
+        {
+            
+        }
+
+        [Test]
+        public void Test1()
         {
             IList<TaxCalculatorLog> taxLogs = new List<TaxCalculatorLog>
             {
@@ -29,20 +35,23 @@ namespace TaxCalculator.Tests
                 }
             };
 
-            Mock<ITaxCalculatorLogRepository> logRepositoryMock = new Mock<ITaxCalculatorLogRepository>();
+            Mock<ITaxCalculatorLogRepository> mocklogRepository = new Mock<ITaxCalculatorLogRepository>();
 
-            logRepositoryMock.Setup(x => x.GetLogAsync()).Returns((System.Threading.Tasks.Task<IEnumerable<TaxCalculatorLog>>)taxLogs);
+            mocklogRepository.Setup(mr => mr.AddLogItem(It.IsAny<TaxCalculatorLogUpdateDto>())).Returns(
+                (TaxCalculatorLog taxLog) =>
+                {
+                    taxLog.AnnualIncome = 1000;
+                    taxLog.PostalCode = "7441";
 
-            logRepositoryMock = (Mock<ITaxCalculatorLogRepository>)logRepositoryMock.Object;
+                    taxLogs.Add(taxLog);
+
+                    return taxLog;
+                });
+
+            // Complete the setup of our Mock Product Repository
+            this._logRepository = (Mock<ITaxCalculatorLogRepository>)mocklogRepository.Object;
+            
         }
 
-        [Test]
-        public void Test1()
-        {
-            IList<TaxCalculatorLog> logs = (IList<TaxCalculatorLog>)_logRepository.GetLogAsync();
-
-            Assert.IsNotNull(logs);
-
-        }
     }
 }
